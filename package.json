@@ -1,0 +1,38 @@
+{
+  "name": "hverk2-vef1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "rollup": "rollup -c",
+    "rollup-watch": "rollup -c -w",
+    "browser-sync": "browser-sync start --server --files index.html ./styles.css ./dist/bundle.js",
+    "sass": "node-sass --source-map-embed styles.scss styles.css",
+    "sass-watch": "node-sass --source-map-embed --watch *.scss --recursive styles.css",
+    "dev": "concurrently npm:browser-sync npm:rollup-watch",
+    "esli": "eslint *.js **/*.js",
+    "styleli": "stylelint *.scss **/*.scss",
+    "test": "concurrently npm:esli npm:styleli"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@rollup/plugin-babel": "^5.2.1",
+    "@rollup/plugin-commonjs": "^16.0.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
+    "rollup": "^2.32.1",
+    "browser-sync": "^2.26.13",
+    "concurrently": "^5.3.0",
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "node-sass": "^4.14.1",
+    "stylelint": "^13.7.2",
+    "stylelint-config-sass-guidelines": "^7.1.0",
+    "stylelint-config-standard": "^20.0.0"
+  }
+}
