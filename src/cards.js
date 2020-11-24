@@ -6,21 +6,21 @@ import { el, element } from './lib/utils.js';
  * @param {*} videoData
  */
 function testCards(videoData) {
-  const children = loadCards(3, videoData);
+  const children = loadCards(videoData);
   const testGrid = element('div', { class: 'grid' }, null,
-    element('div', { class: 'row' }, null, null)
+    element('div', { class: 'row' }, null, children[0])
   );
   const main = document.querySelector('main');
   main.appendChild(testGrid);
-  const gridDiv = document.querySelector('div[class=grid]');
-  for(let i = 0; i < children.length ; i++) {
+  const gridDiv = document.querySelector('div[class=row]');
+  for(let i = 1; i < children.length ; i++) {
     gridDiv.appendChild(children[i]);
   }
 }
 
-function loadCards(noOfCards, videoData) {
+function loadCards(videoData) {
   const childArray = [];
-  for (let i = 0; i < noOfCards; i++) {
+  for (let i = 0; i < videoData.videos.length; i++) {
     childArray.push(
       element('div', { class: 'card col col-4' }, null,
         element('div', { class: 'image' }, null,
