@@ -4,15 +4,44 @@ import { el, element } from './lib/utils.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 const videoId = urlParams.get('id');
+let isPlaying = false;
 
+/**
+ * Spilar video og skiptir úr play í stop icon
+ * @param {video} v
+ *
+ */
 function playVid(v) {
   v.play();
   const lay = document.querySelector('.videooverlay');
   console.log(lay);
   lay.toggleAttribute('hidden');
+  isPlaying = true;
+  const buttn = document.querySelector('.playpause img');
+  buttn.setAttribute('src', './img/pause.svg');
+}
+/**
+ * stoppar video og skiptir ur pause í play icon
+ * @param {video} v
+ */
+function pauseVid(v) {
+  v.pause();
+  const lay = document.querySelector('.videooverlay');
+  lay.toggleAttribute('hidden');
+  isPlaying = false;
+  const buttn = document.querySelector('.playpause img');
+  buttn.setAttribute('src', './img/play.svg');
 }
 
-function pause() {
+function togglePlay(v) {
+  if (isPlaying) {
+    pauseVid(v);
+  } else {
+    playVid(v);
+  }
+}
+
+function back(v) {
 
 }
 
@@ -22,13 +51,18 @@ function loadVideoPlayer(id, videoData) {
   const videocontainer = element('div', { class: 'videocontainer' }, null,
     vid,
     element('div', { class: 'videooverlay' }, null,
-      element('button', { class: 'overlaybutton' }, { click: () => playVid(vid) },
-        element('img', { src: './img/play.svg' }, null, '2'))));
-  //const controls =
+      element('button', { class: 'overlaybutton' }, { click: () => togglePlay(vid) },
+        element('img', { src: './img/play.svg' }, null, id))));
+  const controls = element('div', { class: 'controls grid' }, null,
+    element('button', { class: 'overlaybutton' }, { click: () => back(vid) },
+      element('img', { src: './img/back.svg' }, null, id)),
+    element('button', { class: 'overlaybutton playpause' }, { click: () => togglePlay(vid) },
+      element('img', { src: './img/play.svg' }, null, id)));
 
   const main = document.querySelector('main');
   main.appendChild(title);
   main.appendChild(videocontainer);
+  main.appendChild(controls);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
