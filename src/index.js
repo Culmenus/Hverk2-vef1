@@ -1,4 +1,10 @@
+
 document.addEventListener('DOMContentLoaded', async () => {
   // Hér er allt „vírað“ saman
-  console.log('i am a god');
+
+  let videodata =
+  fetch('../../videos.json')
+    .then((res) => res.json());
+  console.log('hey');
+  console.log(videodata);
 });
