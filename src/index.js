@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (timedur % 60 < 10) {
         theTime = `${theTime}0${(timedur % 60)}`;
       } else {
-        theTime = `theTime${(timedur % 60)}`;
+        theTime = `${theTime}${(timedur % 60)}`;
       }
       return theTime;
     }
@@ -109,11 +109,11 @@ function loadCards(videodata) {
       element('div', { class: 'card col col-4' }, null,
         element('div', { class: 'image' }, null,
           element('img', {src: videodata.videos[i].poster }, null, "skil ekki afhverju það þarf að vera eitthvað hér"),
-          element('div', { class: "video-length" }, null, lengthOfVid(videodata.videos[i]) )
+          element('div', { class: "video-length" }, null, lengthOfVid(videodata.videos[i]))
         ),
         element('div', { class: 'bottom' }, null,
           element('h3', null, null, videodata.videos[i].title),
-          element('div', { class: 'c-counter' }, null, "fyrirsidan")
+          element('div', { class: 'c-counter' }, null, time(videodata.videos[i]))
         )
       )
     );
