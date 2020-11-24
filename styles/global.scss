@@ -20,23 +20,21 @@ a {
 }
 
 button {
-  background-color: $color-lightest-gray;
-  border: 1px solid $color-black;
-  border-radius: 5px;
-  color: $color-almost-black;
-  padding: 0.5rem;
+  margin: 0.5em;
+  padding: 0.5em;
+  background-color: rgba(0,0,0,0);
+  border: none;
   transition: color $transition, background-color $transition;
   word-break: initial;
 }
 
 button:hover {
-  background-color: $color-almost-black;
-  color: $color-lightest-gray;
+  background-color: $color-lightest-gray;
+  color: $color-almost-black;
 }
 
 button:active {
   background-color: $color-lightest-gray;
-  border: 1px solid $color-black;
   color: $color-almost-black;
 }
 
