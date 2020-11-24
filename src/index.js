@@ -110,10 +110,10 @@ function testCards(videodata) {
  */
 
 function loadCards(videodata) {
-  const childArray = [];
+  const cardArray = [];
   for (let i = 0; i < videodata.videos.length; i++) {
     childArray.push(
-      element('div', { class: 'card col col-4' }, { click: () => { window.location.href = `video.html?id=${(i+1)}`; } },
+      element('div', { class: 'card col col-4' }, { click: () => { window.location.href = `video.html?id=${(i + 1)}`; } },
         element('div', { class: 'image' }, null,
           element('img', {src: videodata.videos[i].poster }, null, "skil ekki afhverju það þarf að vera eitthvað hér"),
           element('div', { class: "video-length" }, null, lengthOfVid(videodata.videos[i]))
@@ -125,7 +125,7 @@ function loadCards(videodata) {
       )
     );
   }
-  return childArray;
+  return cardArray;
 }
 
   fetch('../../videos.json')
