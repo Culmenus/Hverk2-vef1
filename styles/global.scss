@@ -30,14 +30,14 @@ button {
 }
 
 button:hover {
-  background-color: $color-lightest-gray;
-  color: $color-almost-black;
+  background-color: $color-almost-black;
+  color: $color-lightest-gray;
 }
 
 button:active {
-  background-color: $color-almost-black;
+  background-color: $color-lightest-gray;
   border: 1px solid $color-black;
-  color: $color-lightest-gray;
+  color: $color-almost-black;
 }
 
 h1,
