@@ -111,7 +111,7 @@ function loadCards(videodata) {
         ),
         element('div', { class: 'bottom' }, null,
           element('h3', null, null, videodata.videos[i].title),
-          element('div', { class: 'c-counter' }, null, "fyrirsidan")
+          element('div', { class: 'c-counter' }, null, time(videodata.videos[i]))
         )
       )
     );
