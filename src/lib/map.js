@@ -1,1 +1,0 @@
-//breyta nafni á fæl
