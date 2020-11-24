@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 //splice
   /**
- * Hleður inn spilunum
+ * Hleður inn spilunum test
  * @param {*} videodata
  */
 function testCards(videodata) {
@@ -101,6 +101,13 @@ function testCards(videodata) {
     gridDiv.appendChild(children[i]);
   }
 }
+
+/**
+ * Tekur inn json fylki af fylkjum. Býr til öll spil út frá
+ * videos fylkinu í videos.json.
+ * @param {JSON} videodata
+ * @return html card array
+ */
 
 function loadCards(videodata) {
   const childArray = [];
