@@ -1,104 +1,89 @@
 document.addEventListener('DOMContentLoaded', async () => {
   // Hér er allt „vírað“ saman
 
-  let videodata;
-  fetch('../../videos.json')
-    .then((res) => res.json())
-    .then((data) => {
-      process(data);
-  });
-});
-
-function process(videodata) {
-  var theTime = time(videodata.videos[1]);
-  var theLength = lengthOfVid(videodata.videos[1]);
-  console.log(theTime);
-  console.log(theLength);
-}
-
-/**
+  /**
  * Use: lengthOfVid(Array)
  * Pre: Array er array úr jason skránni, specifically videos tilvik
  * Result: Skilar streng með duration á 0:00 formi, breytir úr sek.
  */
-function lengthOfVid(VideoDataVideos){
+  function lengthOfVid(VideoDataVideos) {
+    const timedur = VideoDataVideos.duration;
+    let theTime = '';
+    if (timedur < 10) {
+      theTime = `0:0${timedur}`;
+      return theTime;
+    } if (timedur > 9 && timedur < 60) {
+      theTime = `0:${timedur}`;
+      return theTime;
+    } if (timedur > 59) {
+      theTime = `${Math.floor(timedur / 60)}:`;
+      if (timedur % 60 < 10) {
+        theTime = `${theTime}0${(timedur % 60)}`;
+      } else {
+        theTime = `theTime${(timedur % 60)}`;
+      }
+      return theTime;
+    }
+    return '';
+  }
 
-  var time = VideoDataVideos.duration;
-  if(time < 10){
-    let theTime = "0:0" + time;
-    return theTime;
-  }
-  else if(time>9 && time<60){
-    let theTime = "0:" + time;
-    return theTime;
-  }
-  else if(time>59){
-   theTime = "" + Math.floor(time/60) + ":";
-   if(time%60 < 10){
-     theTime = theTime + "0" + time%60;
-   }
-   else{
-     theTime = theTime + time%60;
-   }
-   return theTime;
-  }
-  else{
-    return "";
-  }
-}
+  /**
+   * Use: time(Array)
+   * Pre: Array er array úr jason skránni, specifically videos tilvik
+   * Result: Skilar streng með hversu langt síðan myndbandið var búið til.
+   */
+  function time(videodataVideos) {
+    const d = new Date();
+    const n = d.getTime();
+    let totaltime = n - parseInt(videodataVideos.created, 10);
+    totaltime /= (1000 * 60 * 60);
+    totaltime = Math.round(totaltime);
+    let LongAgo = '';
 
-/**
- * Use: time(Array)
- * Pre: Array er array úr jason skránni, specifically videos tilvik
- * Result: Skilar streng með hversu langt síðan myndbandið var búið til.
- */
-function time(videodataVideos){
-  var d = new Date();
-  var n = d.getTime();
-  var time = n - parseInt(videodataVideos.created);
-  time = time / (1000*60*60);
-  time = Math.round(time);
+    if (totaltime < 2) {
+      LongAgo = ('Fyrir 1 klukkustund síðan');
+      return LongAgo;
+    } if (totaltime > 2 && totaltime < 48) {
+      LongAgo = (`Fyrir ${totaltime} klukkustundum síðan`);
+      return LongAgo;
+    } if (totaltime < 48 && totaltime > 23) {
+      LongAgo = ('Fyrir 1 degi síðan');
+      return LongAgo;
+    } if (totaltime > 48 && totaltime < 168) {
+      LongAgo = `Fyrir ${Math.round(totaltime / 24)} dögum síðan`;
+      return LongAgo;
+    } if (totaltime > 167 && totaltime < (168 * 2)) {
+      LongAgo = ('Fyrir 1 viku síðan');
+      return LongAgo;
+    } if (totaltime > (168 * 2) && totaltime < 720) {
+      LongAgo = `Fyrir ${Math.round((totaltime / 24) / 7)} vikum síðan`;
+      return LongAgo;
+    } if (totaltime > 720 && totaltime < (720 * 2)) {
+      LongAgo = ('Fyrir 1 mánuði síðan');
+      return LongAgo;
+    } if (totaltime > (720 * 2) && totaltime < 8760) {
+      LongAgo = `Fyrir ${Math.round(((totaltime / 24) / 30))} mánuðum síðan`;
+      return LongAgo;
+    } if (totaltime > 8760 && totaltime < (8760 * 2)) {
+      LongAgo = ('Fyrir 1 ári síðan');
+      return LongAgo;
+    } if (totaltime > (8760 * 2)) {
+      LongAgo = `Fyrir ${Math.round((totaltime / 24) / 365)} árum síðan`;
+      return LongAgo;
+    }
+    return LongAgo;
+  }
 
-  if(time <2){
-    var LongAgo =  ("Fyrir " + 1 + " klukkustund síðan");
-    return LongAgo;
+  function process1(videodata) {
+    const theTime = time(videodata.videos[1]);
+    const theLength = lengthOfVid(videodata.videos[1]);
+    console.log(theTime);
+    console.log(theLength);
   }
-  else if(time>2 && time<48){
-    var LongAgo = ("Fyrir " + time + " klukkustundum síðan");
-    return LongAgo;
-  }
-  else if(time<48 && time>23){
-    var LongAgo = ("Fyrir " + 1 + " degi síðan");
-    return LongAgo;
-  }
-  else if(time>48 && time<168){
-    console.log("Fyrir " + Math.round(time/24) + " dögum síðan");
-  }
-  else if(time>167 && time<(168*2)){
-    var LongAgo = ("Fyrir " + 1 + " viku síðan");
-    return LongAgo;
-  }
-  else if(time>(168*2) && time<720){
-    var LongAgo = ("Fyrir " + Math.round((time/24)/7) + " vikum síðan");
-    return LongAgo;
-  }
-  else if(time>720 && time<(720*2)){
-    var LongAgo = ("Fyrir " + 1 + " mánuði síðan");
-    return LongAgo;
-  }
-  else if(time>(720*2) && time<8760){
-    var LongAgo = ("Fyrir " + Math.round(((time/24)/30)) + " mánuðum síðan");
-    return LongAgo;
-  }
-  else if(time>8760 && time<(8760*2)){
-    var LongAgo = ("Fyrir " + 1 + " ári síðan");
-    return LongAgo;
-  }
-  else if(time>(8760*2)){
-    var LongAgo = ("Fyrir " + Math.round((time/24)/365) + " árum síðan");
-    return LongAgo;
-  }
-  else{
-    return "";
-  }
-}
+
+  fetch('../../videos.json')
+    .then((res) => res.json())
+    .then((data) => {
+      process1(data);
+    });
+});

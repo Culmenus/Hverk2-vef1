@@ -1,15 +1,13 @@
 @import './config';
 
 .videocontainer {
-  margin: 0 auto;
-  max-width: $max-width;
-  width: 100%;
-  overflow: hidden;
   display: flex;
   flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: $max-width;
+  overflow: hidden;
   position: relative;
-  //margin-left: ($gutter / -2);
-  //margin-right: ($gutter / -2);
+  width: 100%;
 }
 
 video {
@@ -19,22 +17,22 @@ video {
 
 .title {
   display: flex;
-  justify-content: center;
   font-size: 2rem;
+  justify-content: center;
 }
 
 .videooverlay {
+  align-items: center;
   background: rgba(0, 0, 0, 0.5);
-  position: absolute;
   border-radius: 5px;
-  top: 0;
-  right: 0;
   bottom: 0;
-  left: 0;
-  z-index: 1002;
   display: flex;
   justify-content: center;
-  align-items: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1002;
 }
 
 .overlaybutton img {
