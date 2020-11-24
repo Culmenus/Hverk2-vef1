@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
  * Pre: Array er array úr jason skránni, specifically videos tilvik
  * Result: Skilar streng með duration á 0:00 formi, breytir úr sek.
  */
-  function lengthOfVid(VideoDataVideos) {
-    const timedur = VideoDataVideos.duration;
+  function lengthOfVid(videodataVideos) {
+    const timedur = videodataVideos.duration;
     let theTime = '';
     if (timedur < 10) {
       theTime = `0:0${timedur}`;
@@ -85,10 +85,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 //splice
   /**
  * Hleður inn spilunum
- * @param {*} videoData
+ * @param {*} videodata
  */
-function testCards(videoData) {
-  const children = loadCards(videoData);
+function testCards(videodata) {
+  const children = loadCards(videodata);
+  // Reyndist vera nauðsynlegt að gera children[0] i stadinn fyrir null
+  // því annars var ekki hægt að appenda.
   const testGrid = element('div', { class: 'grid' }, null,
     element('div', { class: 'row' }, null, children[0])
   );
@@ -100,17 +102,17 @@ function testCards(videoData) {
   }
 }
 
-function loadCards(videoData) {
+function loadCards(videodata) {
   const childArray = [];
-  for (let i = 0; i < videoData.videos.length; i++) {
+  for (let i = 0; i < videodata.videos.length; i++) {
     childArray.push(
       element('div', { class: 'card col col-4' }, null,
         element('div', { class: 'image' }, null,
-          element('img', {src: videoData.videos[i].poster }, null, "skil ekki afhverju það þarf að vera eitthvað hér"),
-          element('div', { class: "video-length" }, null, "00:70")
+          element('img', {src: videodata.videos[i].poster }, null, "skil ekki afhverju það þarf að vera eitthvað hér"),
+          element('div', { class: "video-length" }, null, lengthOfVid(videodata.videos[i]) )
         ),
         element('div', { class: 'bottom' }, null,
-          element('h3', null, null, videoData.videos[i].title),
+          element('h3', null, null, videodata.videos[i].title),
           element('div', { class: 'c-counter' }, null, "fyrirsidan")
         )
       )
