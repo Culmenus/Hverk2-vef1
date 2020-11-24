@@ -20,10 +20,10 @@ a {
 }
 
 button {
-  background-color: $color-almost-black;
+  background-color: $color-lightest-gray;
   border: 1px solid $color-black;
   border-radius: 5px;
-  color: $color-lightest-gray;
+  color: $color-almost-black;
   padding: 0.5rem;
   transition: color $transition, background-color $transition;
   word-break: initial;
