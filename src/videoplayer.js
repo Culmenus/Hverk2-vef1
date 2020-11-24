@@ -16,7 +16,9 @@ let isPlaying = false;
 function playVid(v) {
   v.play();
   const lay = document.querySelector('.videooverlay');
-  lay.toggleAttribute('hidden');
+  if (!lay.hasAttribute('hidden')) {
+    lay.toggleAttribute('hidden');
+  }
   isPlaying = true;
   const buttn = document.querySelector('.playpause img');
   buttn.setAttribute('src', './img/pause.svg');
@@ -30,7 +32,9 @@ function playVid(v) {
 function pauseVid(v) {
   v.pause();
   const lay = document.querySelector('.videooverlay');
-  lay.toggleAttribute('hidden');
+  if (lay.hasAttribute('hidden')) {
+    lay.toggleAttribute('hidden');
+  }
   isPlaying = false;
   const buttn = document.querySelector('.playpause img');
   buttn.setAttribute('src', './img/play.svg');
@@ -53,7 +57,7 @@ function togglePlay(v) {
  * @param {video} v
  */
 function back(v) {
-  if (v.currentTime > 0 && v.isPlaying) {
+  if (v.currentTime > 0 && isPlaying) {
     v.currentTime -= 3;
   }
 }
@@ -63,7 +67,7 @@ function back(v) {
  * @param {video} v
  */
 function next(v) {
-  if (v.currentTime < v.duration && v.isPlaying) {
+  if (v.currentTime < v.duration && isPlaying) {
     v.currentTime += 3;
   }
 }
@@ -103,11 +107,10 @@ function loadVideoPlayer(id, videoData) {
   let rel;
   const main = document.querySelector('main');
   videoData.videos.forEach((vid) => {
-    console.log(vid.id);
-    console.log(id);
     if (vid.id === parseInt(id, 10)) {
-      console.log(true);
-      const { title, description, related, video } = vid;
+      const {
+        title, description, related, video,
+      } = vid;
       source = video;
       vidTitle = title;
       descr = description;
