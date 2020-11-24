@@ -24,7 +24,6 @@ function process(videodata) {
 function lengthOfVid(VideoDataVideos){
 
   var time = VideoDataVideos.duration;
-  console.log(time);
   if(time < 10){
     let theTime = "0:0" + time;
     return theTime;
@@ -42,6 +41,9 @@ function lengthOfVid(VideoDataVideos){
      theTime = theTime + time%60;
    }
    return theTime;
+  }
+  else{
+    return "";
   }
 }
 
