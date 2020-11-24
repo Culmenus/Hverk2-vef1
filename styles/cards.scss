@@ -1,0 +1,27 @@
+@import './config';
+
+.card {
+  margin: 1rem 0;
+
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 3rem;
+    width: 100%;
+  }
+
+  .image {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 200px;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .image > img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+}
