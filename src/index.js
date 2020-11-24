@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   function process1(videodata) {
     const theTime = time(videodata.videos[1]);
     const theLength = lengthOfVid(videodata.videos[1]);
-    testCards(data);
+    testCards(videodata);
   }
 
 //splice
