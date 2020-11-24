@@ -11,8 +11,32 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function process(videodata) {
   time(videodata.videos[1]);
+  lengthOfVid(videodata.videos[1]);
 }
 
+function lengthOfVid(VideoDataVideos){
+
+  var time = VideoDataVideos.duration;
+  console.log(time);
+  if(time < 10){
+    let theTime = "0:0" + time;
+    console.log(theTime);
+  }
+  else if(time>9 && time<60){
+    let theTime = "0:" + time;
+    console.log(theTime);
+  }
+  else if(time>59){
+   theTime = "" + Math.floor(time/60) + ":";
+   if(time%60 < 10){
+     theTime = theTime + "0" + time%60;
+   }
+   else{
+     theTime = theTime + time%60;
+   }
+   console.log(theTime);
+  }
+}
 ///tekur inn videos jason array og skilar tímanum frá því að
 ///það var created.
 function time(videodataVideos){
