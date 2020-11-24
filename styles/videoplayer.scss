@@ -1,0 +1,13 @@
+@import './config';
+
+.videocontainer {
+  margin: 0 auto;
+  max-width: $max-width;
+  width: 100%;
+  height: 900px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  //margin-left: ($gutter / -2);
+  //margin-right: ($gutter / -2);
+}
