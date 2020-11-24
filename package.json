@@ -6,7 +6,7 @@
   "scripts": {
     "rollup": "rollup -c",
     "rollup-watch": "rollup -c -w",
-    "browser-sync": "browser-sync start --server --files index.html ./styles.css ./dist/bundle.js",
+    "browser-sync": "browser-sync start --server --files index.html ./styles.css ./dist/bundle.js ./test.html",
     "sass": "node-sass --source-map-embed styles.scss styles.css",
     "sass-watch": "node-sass --source-map-embed --watch styles.scss --recursive styles.css",
     "dev": "concurrently npm:browser-sync npm:rollup-watch npm:sass npm:sass-watch",
