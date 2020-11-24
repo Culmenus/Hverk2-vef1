@@ -9,6 +9,7 @@ let isPlaying = false;
 
 /**
  * Spilar video og skiptir úr play í stop icon
+ * Bara kallað í ef isPlaying er false.
  * @param {video} v
  *
  */
@@ -23,6 +24,7 @@ function playVid(v) {
 
 /**
  * stoppar video og skiptir ur pause í play icon
+ * Bara kallað í ef isPlaying er true.
  * @param {video} v
  */
 function pauseVid(v) {
@@ -51,17 +53,17 @@ function togglePlay(v) {
  * @param {video} v
  */
 function back(v) {
-  if (v.currentTime > 0) {
+  if (v.currentTime > 0 && v.isPlaying) {
     v.currentTime -= 3;
   }
 }
 
 /**
- * myndband f;rt 'afram um 3 sekundur eða á enda
+ * myndband fært áfram um 3 sekundur eða á enda
  * @param {video} v
  */
 function next(v) {
-  if (v.currentTime < v.duration) {
+  if (v.currentTime < v.duration && v.isPlaying) {
     v.currentTime += 3;
   }
 }
@@ -95,32 +97,52 @@ function fullscr(v) {
 }
 
 function loadVideoPlayer(id, videoData) {
-  const vid = element('video', { src: videoData.videos[id - 1].video }, null, id);
-  const title = element('h1', { class: 'title grid' }, null, videoData.videos[id - 1].title);
-  const videocontainer = element('div', { class: 'videocontainer' }, null,
-    vid,
-    element('div', { class: 'videooverlay' }, null,
-      element('button', { class: 'overlaybutton' }, { click: () => togglePlay(vid) },
-        element('img', { src: './img/play.svg' }, null, id))));
-  const controls = element('div', { class: 'controls grid' }, null,
-    element('button', { class: 'overlaybutton' }, { click: () => back(vid) },
-      element('img', { src: './img/back.svg' }, null, id)),
-    element('button', { class: 'overlaybutton playpause' }, { click: () => togglePlay(vid) },
-      element('img', { src: './img/play.svg' }, null, id)),
-    element('button', { class: 'overlaybutton mute' }, { click: () => toggleMute(vid) },
-      element('img', { src: './img/mute.svg' }, null, id)),
-    element('button', { class: 'overlaybutton' }, { click: () => fullscr(vid) },
-      element('img', { src: './img/fullscreen.svg' }, null, id)),
-    element('button', { class: 'overlaybutton' }, { click: () => next(vid) },
-      element('img', { src: './img/next.svg' }, null, id)));
-  const description = element('p', { class: 'grid' }, null, videoData.videos[id - 1].description);
-
+  let source;
+  let vidTitle;
+  let descr;
+  let rel;
   const main = document.querySelector('main');
-  main.appendChild(title);
-  main.appendChild(videocontainer);
-  main.appendChild(controls);
-  main.appendChild(description);
-  main.appendChild(element('h2', { class: 'grid' }, null, 'Tengd myndbönd'));
+  videoData.videos.forEach((vid) => {
+    console.log(vid.id);
+    console.log(id);
+    if (vid.id === parseInt(id, 10)) {
+      console.log(true);
+      const { title, description, related, video } = vid;
+      source = video;
+      vidTitle = title;
+      descr = description;
+      rel = related;
+    }
+  });
+  if (!source) {
+    main.appendChild(element('h1', { class: 'grid' }, null, 'Myndband fannst ekki.'));
+  } else {
+    const vid = element('video', { src: source }, null, id);
+    const title = element('h1', { class: 'title grid' }, null, vidTitle);
+    const videocontainer = element('div', { class: 'videocontainer' }, null,
+      vid,
+      element('div', { class: 'videooverlay' }, null,
+        element('button', { class: 'overlaybutton' }, { click: () => togglePlay(vid) },
+          element('img', { src: './img/play.svg' }, null, id))));
+    const controls = element('div', { class: 'controls grid' }, null,
+      element('button', { class: 'overlaybutton' }, { click: () => back(vid) },
+        element('img', { src: './img/back.svg' }, null, id)),
+      element('button', { class: 'overlaybutton playpause' }, { click: () => togglePlay(vid) },
+        element('img', { src: './img/play.svg' }, null, id)),
+      element('button', { class: 'overlaybutton mute' }, { click: () => toggleMute(vid) },
+        element('img', { src: './img/mute.svg' }, null, id)),
+      element('button', { class: 'overlaybutton' }, { click: () => fullscr(vid) },
+        element('img', { src: './img/fullscreen.svg' }, null, id)),
+      element('button', { class: 'overlaybutton' }, { click: () => next(vid) },
+        element('img', { src: './img/next.svg' }, null, id)));
+    const description = element('p', { class: 'grid' }, null, descr);
+
+    main.appendChild(title);
+    main.appendChild(videocontainer);
+    main.appendChild(controls);
+    main.appendChild(description);
+    main.appendChild(element('h2', { class: 'grid' }, null, 'Tengd myndbönd'));
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
