@@ -7,6 +7,7 @@
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
+  position: relative;
   //margin-left: ($gutter / -2);
   //margin-right: ($gutter / -2);
 }
@@ -22,11 +23,19 @@ video {
 }
 
 .videooverlay {
-  display: flex;
+  background: rgba(0, 0, 0, 0.5);
   position: absolute;
-  height: 100%;
-  width: 100%;
+  border-radius: 5px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 2;
+.overlaybutton img {
+  width: 3rem;
 }
