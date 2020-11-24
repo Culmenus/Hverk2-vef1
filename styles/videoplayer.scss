@@ -41,7 +41,10 @@ video {
   width: 3rem;
 }
 
-
+.controls {
+  display: flex;
+  justify-content: center;
+}
 
 [hidden] {
   display: none;
