@@ -6,11 +6,12 @@ const urlParams = new URLSearchParams(window.location.search);
 const videoId = urlParams.get('id');
 
 function loadVideoPlayer(id, videoData) {
-  const elem = element('div', { class: 'videocontainer' }, null,
+  const videocontainer = element('div', { class: 'videocontainer' }, null,
+    element('div', { class: 'videooverlay' }, null, ''),
     element('video', { src: videoData.videos[id - 1].video }, null, id));
 
   const main = document.querySelector('main');
-  main.appendChild(elem);
+  main.appendChild(videocontainer);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
