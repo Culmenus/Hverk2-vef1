@@ -12,7 +12,8 @@
     "dev": "concurrently npm:browser-sync npm:rollup-watch npm:sass npm:sass-watch",
     "esli": "eslint *.js **/*.js",
     "styleli": "stylelint *.scss **/*.scss",
-    "test": "concurrently npm:esli npm:styleli"
+    "test": "concurrently npm:esli npm:styleli",
+    "lint": "npm:test"
   },
   "keywords": [],
   "author": "",
