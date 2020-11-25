@@ -1,10 +1,10 @@
-import { element } from './lib/utils.js';
-import { loadCards, displayCards, time, lengthOfVid, loadSection } from './lib/displayvideos.js'
+/* eslint-disable import/extensions */
+import { loadCards, loadSection } from './lib/displayvideos.js';
 
 async function init(videodata) {
   const lenCat = videodata.categories.length;
-  for (let i = 0; i < lenCat; i++) {
-    loadSection(videodata.categories[i].title, loadCards(videodata, videodata.categories[i].videos),`section-${i}`);
+  for (let i = 0; i < lenCat; i += 1) {
+    loadSection(videodata.categories[i].title, loadCards(videodata, videodata.categories[i].videos), `section-${i}`);
   }
 }
 
