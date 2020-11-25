@@ -1,13 +1,12 @@
-import { el, element } from './utils.js';
-//splice
-  /**
+import { element } from './utils.js';
+
+/**
  * Hleður inn spilunum test
  * @param {JSON} videodata
  * @param {Array} arr fylki af ids
  */
 // eslint-disable-next-line import/prefer-default-export
-export async function displayCards(videodata, arr) {
-  console.log('var verið að kalla?');
+export function displayCards(videodata, arr) {
   const children = loadCards(videodata, arr);
   // Reyndist vera nauðsynlegt að gera children[0] i stadinn fyrir null
   // því annars var ekki hægt að appenda.
@@ -19,12 +18,30 @@ export async function displayCards(videodata, arr) {
   for (let i = 1; i < children.length; i += 1) {
     gridDiv.appendChild(children[i]);
   }
-  return 0;
+}
+/**
+ * Tekur inn sectionId til að querySelector velji rétt.
+ * Fylki spilanna fyrir sectionið og titil fyrir það.
+ * @param {String} sectionId
+ * @param {Card array} cardArray
+ * @param {String} sectionTitle
+ * @return Ekkert.
+ */
+export function loadSection(sectionTitle, cardArray, sectionId) {
+  const container = element('section', {class: 'grid'}, null,
+    element('h2', {class: 'row col'}, null, sectionTitle),
+    element('div', { class:'row', id: sectionId }, null, cardArray[0]));
+  const main = document.querySelector('main');
+  main.appendChild(container);
+  const rowDiv = document.querySelector(`div[id=${sectionId}]`);
+  for (let i = 1; i < cardArray.length; i++) {
+    rowDiv.appendChild(cardArray[i]);
+  }
 }
 
 /**
- * Tekur inn json fylki af fylkjum. Býr til öll spil út frá
- * videos fylkinu í videos.json.
+ * Tekur inn json fylki af fylkjum og fylki af id's.
+ * Skilar fylki af þeim spilum sem samsvara ids í innteknu fylki
  * @param {JSON} videodata
  * @return html card array
  */
@@ -47,7 +64,6 @@ export function loadCards(videodata, arr) {
   });
   return cardArray;
 }
-
 
 /**
  * Use: lengthOfVid(Array)

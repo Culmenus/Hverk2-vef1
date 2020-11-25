@@ -1,26 +1,11 @@
-import { el, element } from './lib/utils.js';
-import { displayCards, time, lengthOfVid } from './lib/displayvideos.js'
+import { element } from './lib/utils.js';
+import { loadCards, displayCards, time, lengthOfVid, loadSection } from './lib/displayvideos.js'
 
-async function process1(videodata) {
-  const theTime = time(videodata.videos[1]);
-  const theLength = lengthOfVid(videodata.videos[1]);
+async function init(videodata) {
   const lenCat = videodata.categories.length;
-
-
-
-  displayTitle(videodata, videodata.categories[0].title);
-  displayCards(videodata, videodata.categories[0].videos);
-
-  //const resolve3 = await displayTitle(videodata, videodata.categories[1].title);
-  //const resolve4 = await displayCards(videodata, videodata.categories[1].videos);
-  //console.log(videodata.categories[1].videos);
-}
-
-async function displayTitle(data, title) {
-  const main = document.querySelector('main');
-  const theTitle = element('h2', { class: 'grid' }, null, title);
-  main.appendChild(theTitle);
-  return 0;
+  for (let i = 0; i < lenCat; i++) {
+    loadSection(videodata.categories[i].title, loadCards(videodata, videodata.categories[i].videos),`section-${i}`);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -28,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   fetch('../../videos.json')
     .then((res) => res.json())
     .then((data) => {
-      process1(data);
+      init(data);
     });
 });
 
