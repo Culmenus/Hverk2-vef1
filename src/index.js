@@ -9,7 +9,6 @@ async function init(videodata) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  // Hér er allt „vírað“ saman
   fetch('../../videos.json')
     .then((res) => res.json())
     .then((data) => {
