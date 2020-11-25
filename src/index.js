@@ -79,54 +79,108 @@ document.addEventListener('DOMContentLoaded', async () => {
   function process1(videodata) {
     const theTime = time(videodata.videos[1]);
     const theLength = lengthOfVid(videodata.videos[1]);
-    testCards(videodata);
+    //testCards(videodata);
+    indexSections(videodata);
   }
 
-//splice
-  /**
- * Hleður inn spilunum test
- * @param {*} videodata
- */
-function testCards(videodata) {
-  const children = loadCards(videodata);
-  // Reyndist vera nauðsynlegt að gera children[0] i stadinn fyrir null
-  // því annars var ekki hægt að appenda.
-  const testGrid = element('div', { class: 'grid' }, null,
-    element('div', { class: 'row' }, null, children[0])
-  );
-  const main = document.querySelector('main');
-  main.appendChild(testGrid);
-  const gridDiv = document.querySelector('div[class=row]');
-  for(let i = 1; i < children.length ; i++) {
-    gridDiv.appendChild(children[i]);
+  // test
+  function indexSections(videodata) {
+    for(let i = 0; i< videodata.categories.length; i++) {
+      let selectedCards = loadSelectedCards(videodata, videodata.categories[i].videos);
+      loadSection(videodata.categories[i].title, selectedCards);
+    }
   }
-}
-
-/**
- * Tekur inn json fylki af fylkjum. Býr til öll spil út frá
- * videos fylkinu í videos.json.
- * @param {JSON} videodata
- * @return html card array
- */
-
-function loadCards(videodata) {
-  const cardArray = [];
-  for (let i = 0; i < videodata.videos.length; i++) {
-    cardArray.push(
-      element('div', { class: 'card col col-4' }, null,
-        element('div', { class: 'image' }, null,
-          element('img', {src: videodata.videos[i].poster }, null, "skil ekki afhverju það þarf að vera eitthvað hér"),
-          element('div', { class: "video-length" }, null, lengthOfVid(videodata.videos[i]))
-        ),
-        element('div', { class: 'bottom' }, null,
-          element('h3', null, null, videodata.videos[i].title),
-          element('div', { class: 'c-counter' }, null, time(videodata.videos[i]))
-        )
-      )
+  //splice
+    /**
+   * Hleður inn spilunum test
+   * @param {*} videodata
+   */
+  function testCards(videodata) {
+    const children = loadCards(videodata);
+    // Reyndist vera nauðsynlegt að gera children[0] i stadinn fyrir null
+    // því annars var ekki hægt að appenda.
+    const testGrid = element('div', { class: 'grid' }, null,
+      element('div', { class: 'row' }, null, children[0])
     );
+    const main = document.querySelector('main');
+    main.appendChild(testGrid);
+    const gridDiv = document.querySelector('div[class=row]');
+    for(let i = 1; i < children.length ; i++) {
+      gridDiv.appendChild(children[i]);
+    }
   }
-  return cardArray;
-}
+
+  /**
+   * Tekur inn json fylki af fylkjum. Býr til öll spil út frá
+   * videos fylkinu í videos.json.
+   * @param {JSON} videodata
+   * @return Fylki af öllum html spilum.
+   */
+
+  function loadCards(videodata) {
+    const cardArray = [];
+    for (let i = 0; i < videodata.videos.length; i++) {
+      cardArray.push(
+        element('div', { class: 'card col col-4' }, null,
+          element('div', { class: 'image' }, null,
+            element('img', {src: videodata.videos[i].poster }, null, "skil ekki afhverju það þarf að vera eitthvað hér"),
+            element('div', { class: "video-length" }, null, lengthOfVid(videodata.videos[i]))
+          ),
+          element('div', { class: 'bottom' }, null,
+            element('h3', null, null, videodata.videos[i].title),
+            element('div', { class: 'c-counter' }, null, time(videodata.videos[i]))
+          )
+        )
+      );
+    }
+    return cardArray;
+  }
+
+
+  /**
+   * Tekur inn json fylki af fylkjum. Býr til ákveðin spil út frá
+   * videos fylkinu í videos.json.
+   * @param {JSON array} videodata
+   * @param {Integer array} videoIds
+   * @return Fylki af öllum html spilum.
+   */
+
+  function loadSelectedCards(videodata, videoIds) {
+    const cardArray = [];
+    for (let i = 0; i < videoIds.length; i++) {
+      cardArray.push(
+        element('div', { class: 'card col col-4' }, null,
+          element('div', { class: 'image' }, null,
+            element('img', {src: videodata.videos[videoIds[i]-1].poster }, null, "s"),
+            element('div', { class: "video-length" }, null, lengthOfVid(videodata.videos[videoIds[i]-1]))
+          ),
+          element('div', { class: 'bottom' }, null,
+            element('h3', null, null, videodata.videos[videoIds[i]-1].title),
+            element('div', { class: 'c-counter' }, null, time(videodata.videos[videoIds[i]-1]))
+          )
+        )
+      );
+    }
+    return cardArray;
+  }
+
+  /**
+   *
+   * @param {Card array} cardArray
+   * @param {String} sectionTitle
+   * @return Ekkert.
+   */
+  function loadSection(sectionTitle, cardArray) {
+    const container = element('section', {class: 'grid'}, null,
+      element('h2',null , null, sectionTitle),
+      element('div', { class:'row' }, null, cardArray[0]));
+    const rowDiv = document.querySelector('div[class=row]');
+    const main = document.querySelector('main');
+    main.appendChild(container);
+    for(let i = 1; i < cardArray.length; i++) {
+      rowDiv.appendChild(cardArray[i]);
+    }
+  }
 
   fetch('../../videos.json')
     .then((res) => res.json())
