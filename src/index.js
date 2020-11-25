@@ -8,20 +8,8 @@ async function process1(videodata) {
 
 
 
-  setTimeout(() => {
-    displayTitle(videodata, videodata.categories[0].title);
-    displayCards(videodata, videodata.categories[0].videos);
-    }, 0);
-
-  setTimeout(() => {
-    displayTitle(videodata, videodata.categories[1].title);
-    displayCards(videodata, videodata.categories[1].videos);
-    }, 1000);
-
-  setTimeout(() => {
-    displayTitle(videodata, videodata.categories[2].title);
-    displayCards(videodata, videodata.categories[2].videos);
-    }, 2000);
+  displayTitle(videodata, videodata.categories[0].title);
+  displayCards(videodata, videodata.categories[0].videos);
 
   //const resolve3 = await displayTitle(videodata, videodata.categories[1].title);
   //const resolve4 = await displayCards(videodata, videodata.categories[1].videos);
