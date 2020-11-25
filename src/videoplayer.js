@@ -138,7 +138,7 @@ function loadVideoPlayer(id, videoData) {
     }
   });
   if (!source) {
-    main.appendChild(element('h1', { class: 'grid' }, null, 'Myndband fannst ekki.'));
+    main.appendChild(element('h1', { class: 'grid title' }, null, 'Myndband fannst ekki.'));
   } else {
     const vid = element('video', { src: source }, null, id);
     const title = element('h1', { class: 'title grid' }, null, vidTitle);
@@ -169,7 +169,14 @@ function loadVideoPlayer(id, videoData) {
 
 document.addEventListener('DOMContentLoaded', async () => {
   fetch('../../videos.json')
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        const main = document.querySelector('main');
+        main.appendChild(element('h1', { class: 'grid title' }, null, 'Myndband fannst ekki.'));
+        throw res;
+      }
+      return res.json();
+    })
     .then((data) => {
       loadVideoPlayer(videoId, data);
     });
