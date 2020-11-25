@@ -102,14 +102,12 @@ function fullscr(v) {
 }
 
 function loadRelated(videoData, relArr) {
-  console.log(relArr);
   displayCards(videoData, relArr);
   const footer = element('footer', { class: 'vidfooter' }, null,
     element('a', { href: 'index.html' }, null, 'Til baka'));
   const main = document.querySelector('main');
   main.appendChild(footer);
 }
-
 
 function loadVideoPlayer(id, videoData) {
   let source;
