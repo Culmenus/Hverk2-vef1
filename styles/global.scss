@@ -45,6 +45,12 @@ h4 {
   font-family: 'Montaga', Georgia, serif;
 }
 
+h1 {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  text-align: center;
+}
+
 h2 {
   margin-top: 1rem;
 }
@@ -62,7 +68,6 @@ p {
   display: flex;
   justify-content: center;
   font-size: 2rem;
-  margin-bottom: 1rem;
 }
 
 .section-underline {
