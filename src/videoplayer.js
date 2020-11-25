@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/extensions
-import { el, element } from './lib/utils.js';
+import { element } from './lib/utils.js';
 // virkar ekki án .js
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -75,7 +75,7 @@ function next(v) {
 /**
  * ef hljóð er að spila er slökkt á því annars öfugt
  *   og hljóð icon breytt í samræmi
- * @param {vieo} v
+ * @param {video} v
  */
 function toggleMute(v) {
   const buttn = document.querySelector('.mute img');
@@ -139,12 +139,15 @@ function loadVideoPlayer(id, videoData) {
       element('button', { class: 'overlaybutton' }, { click: () => next(vid) },
         element('img', { src: './img/next.svg' }, null, id)));
     const description = element('p', { class: 'grid' }, null, descr);
-
+    const footer = element('footer', { class: 'vidfooter' }, null,
+      element('a', { href: 'index.html' }, null, 'Til baka'));
     main.appendChild(title);
     main.appendChild(videocontainer);
     main.appendChild(controls);
     main.appendChild(description);
     main.appendChild(element('h2', { class: 'grid' }, null, 'Tengd myndbönd'));
+    //main.appendChild(tengdmyndb-nd);
+    main.appendChild(footer);
   }
 }
 
