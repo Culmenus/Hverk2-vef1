@@ -79,28 +79,28 @@ document.addEventListener('DOMContentLoaded', async () => {
   function process1(videodata) {
     const theTime = time(videodata.videos[1]);
     const theLength = lengthOfVid(videodata.videos[1]);
-    testCards(videodata);
+    displayCards(videodata);
   }
 
 //splice
-  /**
- * Hleður inn spilunum test
- * @param {*} videodata
- */
-function testCards(videodata) {
-  const children = loadCards(videodata);
-  // Reyndist vera nauðsynlegt að gera children[0] i stadinn fyrir null
-  // því annars var ekki hægt að appenda.
-  const testGrid = element('div', { class: 'grid' }, null,
-    element('div', { class: 'row' }, null, children[0])
-  );
-  const main = document.querySelector('main');
-  main.appendChild(testGrid);
-  const gridDiv = document.querySelector('div[class=row]');
-  for(let i = 1; i < children.length ; i++) {
-    gridDiv.appendChild(children[i]);
+    /**
+   * Hleður inn spilunum test
+   * @param {*} videodata
+   */
+  function displayCards(videodata, arr) {
+    const children = loadCards(videodata, arr);
+    // Reyndist vera nauðsynlegt að gera children[0] i stadinn fyrir null
+    // því annars var ekki hægt að appenda.
+    const testGrid = element('div', { class: 'grid' }, null,
+      element('div', { class: 'row' }, null, children[0]),
+    );
+    const main = document.querySelector('main');
+    main.appendChild(testGrid);
+    const gridDiv = document.querySelector('div[class=row]');
+    for(let i = 1; i < children.length ; i++) {
+      gridDiv.appendChild(children[i]);
+    }
   }
-}
 
 /**
  * Tekur inn json fylki af fylkjum. Býr til öll spil út frá
@@ -109,24 +109,24 @@ function testCards(videodata) {
  * @return html card array
  */
 
-function loadCards(videodata) {
-  const cardArray = [];
-  for (let i = 0; i < videodata.videos.length; i++) {
-    cardArray.push(
-      element('div', { class: 'card col col-4' }, { click: () => { window.location.href = `video.html?id=${(i + 1)}`; } },
-        element('div', { class: 'image' }, null,
-          element('img', {src: videodata.videos[i].poster }, null, "skil ekki afhverju það þarf að vera eitthvað hér"),
-          element('div', { class: "video-length" }, null, lengthOfVid(videodata.videos[i]))
-        ),
-        element('div', { class: 'bottom' }, null,
-          element('h3', null, null, videodata.videos[i].title),
-          element('div', { class: 'c-counter' }, null, time(videodata.videos[i]))
+  function loadCards(videodata, arr = [2,3,4]) {
+    const cardArray = [];
+    arr.forEach((i) => {
+      cardArray.push(
+        element('div', { class: 'card col col-4' }, { click: () => { window.location.href = `video.html?id=${(i)}`; } },
+          element('div', { class: 'image' }, null,
+            element('img', {src: videodata.videos[i - 1].poster }, null, "skil ekki afhverju það þarf að vera eitthvað hér"),
+            element('div', { class: "video-length" }, null, lengthOfVid(videodata.videos[i - 1])),
+          ),
+          element('div', { class: 'bottom' }, null,
+            element('h3', null, null, videodata.videos[i - 1].title),
+            element('div', { class: 'c-counter' }, null, time(videodata.videos[i - 1])),
+          )
         )
-      )
-    );
+      );
+    });
+    return cardArray;
   }
-  return cardArray;
-}
 
   fetch('../../videos.json')
     .then((res) => res.json())
