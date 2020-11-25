@@ -171,12 +171,13 @@ document.addEventListener('DOMContentLoaded', async () => {
    * @return Ekkert.
    */
   function loadSection(sectionTitle, cardArray) {
+
     const container = element('section', {class: 'grid'}, null,
-      element('h2',null , null, sectionTitle),
+      element('h2', {class: 'row'}, null, sectionTitle),
       element('div', { class:'row' }, null, cardArray[0]));
-    const rowDiv = document.querySelector('div[class=row]');
     const main = document.querySelector('main');
     main.appendChild(container);
+    const rowDiv = document.querySelector('div[class=row]');
     for(let i = 1; i < cardArray.length; i++) {
       rowDiv.appendChild(cardArray[i]);
     }
