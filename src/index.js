@@ -1,15 +1,21 @@
 /* eslint-disable import/extensions */
 import { loadCards, loadSection } from './lib/displayvideos.js';
 import { element } from './lib/utils.js';
+
 /**
  * upphafsstillir forsiðuna
  * @param {JSON} videodata
  */
 function init(videodata) {
+  const main = document.querySelector('main');
+  main.appendChild(element('h1', { class: 'grid title' }, null, 'Fræðslumyndbandaleigan'));
   const lenCat = videodata.categories.length;
   for (let i = 0; i < lenCat; i += 1) {
     loadSection(videodata.categories[i].title, loadCards(videodata, videodata.categories[i].videos), `section-${i}`);
   }
+  const footer = element('footer', { class: 'vidfooter' }, null,
+    element('p', null, null, '\u{A9} Fræðslumyndbandaleigan'));
+  main.appendChild(footer);
 }
 
 /**

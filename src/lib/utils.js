@@ -34,7 +34,6 @@ export function element(name, attributes = null, events = null, ...children) {
 
     if (attributes) {
       for (const attrib in attributes) {
-        console.log('attrib :>> ', attrib);
         el.setAttribute(attrib, attributes[attrib]);
       }
     }
