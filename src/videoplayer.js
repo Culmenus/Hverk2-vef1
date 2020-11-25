@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/extensions */
-import { displayCards } from './lib/displayvideos.js';
+import { loadCards, loadSection } from './lib/displayvideos.js';
 import { element } from './lib/utils.js';
 // virkar ekki án .js
 
@@ -101,14 +101,25 @@ function fullscr(v) {
   }
 }
 
+/**
+ * Setur upp tengd myndbönd section
+ *  og birtir myndbönd með id sem finna má í relArr
+ * @param {JSON} videoData
+ * @param {Array} relArr
+ */
 function loadRelated(videoData, relArr) {
-  displayCards(videoData, relArr);
+  loadSection('Tengd myndbönd', loadCards(videoData, relArr), 'section-related');
   const footer = element('footer', { class: 'vidfooter' }, null,
     element('a', { href: 'index.html' }, null, 'Til baka'));
   const main = document.querySelector('main');
   main.appendChild(footer);
 }
-
+/**
+ * Hleður inn videospilara sem spilar video úr json skrá með id sem tekið er inn
+ * Kallar einnig á fallið loadRelated sem hleður tengdum myndböndum
+ * @param {int} id
+ * @param {JSON} videoData
+ */
 function loadVideoPlayer(id, videoData) {
   let source;
   let vidTitle;
@@ -152,8 +163,6 @@ function loadVideoPlayer(id, videoData) {
     main.appendChild(videocontainer);
     main.appendChild(controls);
     main.appendChild(description);
-    main.appendChild(element('h2', { class: 'grid' }, null, 'Tengd myndbönd'));
-    //main.appendChild(footer);
   }
   loadRelated(videoData, rel);
 }
