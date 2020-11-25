@@ -2,6 +2,7 @@
 // Allir stílar fyrir "global", þ.e.a.s. type selectorar, reset etc
 
 // ma breyta að vild kv d
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
 
 * {
   box-sizing: border-box;
@@ -42,7 +43,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Montaga', Georgia, serif;
+  font-family: 'Open Sans','Montaga', Georgia, serif;
 }
 
 .title {
