@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/extensions
-import { displayCards } from './index.js';
+import { displayCards } from './lib/displayvideos.js';
 import { element } from './lib/utils.js';
 // virkar ekki án .js
 
