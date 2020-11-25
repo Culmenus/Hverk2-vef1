@@ -13,7 +13,8 @@ import { lengthOfVid, time } from './calculations.js';
 export function loadSection(sectionTitle, cardArray, sectionId) {
   const container = element('section', { class: 'grid' }, null,
     element('h2', { class: 'row col' }, null, sectionTitle),
-    element('div', { class: 'row', id: sectionId }, null, cardArray[0]));
+    element('div', { class: 'row', id: sectionId }, null, cardArray[0]),
+    element('div', { class: 'row col col-10 offset-col-1 section-underline' }, null, ' '));
   const main = document.querySelector('main');
   main.appendChild(container);
   const rowDiv = document.querySelector(`div[id=${sectionId}]`);
