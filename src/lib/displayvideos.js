@@ -33,7 +33,7 @@ export function loadCards(videodata, arr) {
   const cardArray = [];
   arr.forEach((i) => {
     cardArray.push(
-      element('div', { class: 'card col col-4' }, { click: () => { window.location.href = `video.html?id=${(i)}`; } },
+      element('div', { class: 'card col col-4 col-md-12' }, { click: () => { window.location.href = `video.html?id=${(i)}`; } },
         element('div', { class: 'image' }, null,
           element('img', { src: videodata.videos[i - 1].poster }, null, 'skil ekki afhverju það þarf að vera eitthvað hér'),
           element('div', { class: 'video-length' }, null, lengthOfVid(videodata.videos[i - 1]))),
