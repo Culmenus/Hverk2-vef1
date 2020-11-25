@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/extensions
-import { el, element } from './lib/utils.js';
+import { displayCards } from './lib/displayvideos.js';
+import { element } from './lib/utils.js';
 // virkar ekki án .js
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -16,7 +17,9 @@ let isPlaying = false;
 function playVid(v) {
   v.play();
   const lay = document.querySelector('.videooverlay');
-  lay.toggleAttribute('hidden');
+  if (!lay.hasAttribute('hidden')) {
+    lay.toggleAttribute('hidden');
+  }
   isPlaying = true;
   const buttn = document.querySelector('.playpause img');
   buttn.setAttribute('src', './img/pause.svg');
@@ -30,7 +33,9 @@ function playVid(v) {
 function pauseVid(v) {
   v.pause();
   const lay = document.querySelector('.videooverlay');
-  lay.toggleAttribute('hidden');
+  if (lay.hasAttribute('hidden')) {
+    lay.toggleAttribute('hidden');
+  }
   isPlaying = false;
   const buttn = document.querySelector('.playpause img');
   buttn.setAttribute('src', './img/play.svg');
@@ -53,7 +58,7 @@ function togglePlay(v) {
  * @param {video} v
  */
 function back(v) {
-  if (v.currentTime > 0 && v.isPlaying) {
+  if (v.currentTime > 0 && isPlaying) {
     v.currentTime -= 3;
   }
 }
@@ -63,7 +68,7 @@ function back(v) {
  * @param {video} v
  */
 function next(v) {
-  if (v.currentTime < v.duration && v.isPlaying) {
+  if (v.currentTime < v.duration && isPlaying) {
     v.currentTime += 3;
   }
 }
@@ -71,7 +76,7 @@ function next(v) {
 /**
  * ef hljóð er að spila er slökkt á því annars öfugt
  *   og hljóð icon breytt í samræmi
- * @param {vieo} v
+ * @param {video} v
  */
 function toggleMute(v) {
   const buttn = document.querySelector('.mute img');
@@ -96,6 +101,16 @@ function fullscr(v) {
   }
 }
 
+function loadRelated(videoData, relArr) {
+  console.log(relArr);
+  displayCards(videoData, relArr);
+  const footer = element('footer', { class: 'vidfooter' }, null,
+    element('a', { href: 'index.html' }, null, 'Til baka'));
+  const main = document.querySelector('main');
+  main.appendChild(footer);
+}
+
+
 function loadVideoPlayer(id, videoData) {
   let source;
   let vidTitle;
@@ -103,11 +118,10 @@ function loadVideoPlayer(id, videoData) {
   let rel;
   const main = document.querySelector('main');
   videoData.videos.forEach((vid) => {
-    console.log(vid.id);
-    console.log(id);
     if (vid.id === parseInt(id, 10)) {
-      console.log(true);
-      const { title, description, related, video } = vid;
+      const {
+        title, description, related, video,
+      } = vid;
       source = video;
       vidTitle = title;
       descr = description;
@@ -136,13 +150,14 @@ function loadVideoPlayer(id, videoData) {
       element('button', { class: 'overlaybutton' }, { click: () => next(vid) },
         element('img', { src: './img/next.svg' }, null, id)));
     const description = element('p', { class: 'grid' }, null, descr);
-
     main.appendChild(title);
     main.appendChild(videocontainer);
     main.appendChild(controls);
     main.appendChild(description);
     main.appendChild(element('h2', { class: 'grid' }, null, 'Tengd myndbönd'));
+    //main.appendChild(footer);
   }
+  loadRelated(videoData, rel);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

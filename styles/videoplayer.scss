@@ -47,3 +47,12 @@ video {
 [hidden] {
   display: none;
 }
+
+.vidfooter {
+  display: flex;
+  justify-content: center;
+  a {
+    font-size: 1rem;
+  }
+  margin: 2rem;
+}
