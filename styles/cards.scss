@@ -6,9 +6,12 @@
   .bottom {
     display: flex;
     flex-direction: column;
-    height: 3rem;
-    justify-content: space-around;
+    height: auto;
     width: 100%;
+  }
+
+  .c-counter {
+    margin-top: 0.25rem;
   }
 
   .video-length {
