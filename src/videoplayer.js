@@ -89,7 +89,7 @@ function toggleMute(v) {
 }
 
 /**
- * setur myndband í fullscreen, felur overlay til að það
+ * Setur myndband í fullscreen, felur overlay til að það
  *  sé örugglega farið þegar við förum úr fullscreen.
  * @param {video} v
  */

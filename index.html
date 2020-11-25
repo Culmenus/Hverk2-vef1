@@ -10,24 +10,9 @@
 
 <body>
   <main>
-    <!--
-        engin harðkóðun, nota utils föll til að smíða html
-        allt í lagi að harðkóða á meðan við erum að þróa css
-
-        kannski nota modular og forlykkju í css til að setja cards í grid?
-          gróf hugmynd: for i < videos.length offset-col-${i mod 3}
-            if i mod 3 === 0 setja row class á eða eh álíka
-
-        kannski til betri leið til að sýna að við séum að hlaða gögnum?
-
-        brenna þetta comment að þróun lokinni so help me god
-      -->
-    <a href="video.html?id=1">video nr 1</a>
-    <a href="video.html?id=2">video nr 2</a>
-    <a href="test.html">Leiksvæði ODDADODDA :^)</a>
+    <h1 class="loading grid title">Hleð gögnum...</h1>
   </main>
-  <!-- Breytti i src/cards.js fr'a src/index.js fyrir test-->
-  <script  type = "module" src = "src/index.js"></script>
+  <script type="module" src="src/index.js"></script>
 </body>
 
 </html>
