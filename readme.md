@@ -25,7 +25,9 @@ npm run lint keyrir stylelint á sass og npm run test keyrir bæði stylelint og
 Verkefnið unnu:
 
 Daníel Helgi Ágústsson, hí notendanafn: dha7, github notendanafn: dha7
+
 Oddur Áskell Thoroddsen, hí notendanafn: oat3 github notendanafn: Culmenus
+
 Tristan Freyr Jónsson, hí notendanafn tfj2, github notendanafn: tfj2
 
 ## Project status
