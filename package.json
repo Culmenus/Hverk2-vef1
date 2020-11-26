@@ -13,7 +13,7 @@
     "esli": "eslint *.js **/*.js",
     "styleli": "stylelint *.scss **/*.scss",
     "test": "concurrently npm:esli npm:styleli",
-    "lint": "concurrently npm:styleli"
+    "lint": "stylelint *.scss **/*.scss"
   },
   "keywords": [],
   "author": "",
