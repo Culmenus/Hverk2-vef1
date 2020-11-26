@@ -21,10 +21,10 @@ a {
 }
 
 button {
+  background-color: rgba(0, 0, 0, 0);
+  border: hidden;
   margin: 0.5em;
   padding: 0.5em;
-  background-color: rgba(0,0,0,0);
-  border: none;
   transition: color $transition, background-color $transition;
   word-break: initial;
 }
@@ -43,7 +43,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Open Sans','Montaga', Georgia, serif;
+  font-family: 'Open Sans', 'Montaga', Georgia, serif;
 }
 
 h1 {
@@ -67,8 +67,8 @@ p {
 
 .title {
   font-size: 2rem;
-  word-wrap: break-word;
   text-align: center;
+  word-wrap: break-word;
 }
 
 .section-underline {
@@ -82,4 +82,3 @@ main {
   padding-left: 10px;
   padding-right: 10px;
 }
-
