@@ -37,7 +37,7 @@ function appendError(message) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  fetch('../../videos.json')
+  fetch('./videos.json')
     .then((res) => {
       if (!res.ok) {
         appendError('Gögn fundust ekki.');

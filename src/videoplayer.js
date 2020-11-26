@@ -168,7 +168,7 @@ function loadVideoPlayer(id, videoData) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  fetch('../../videos.json')
+  fetch('./videos.json')
     .then((res) => {
       if (!res.ok) {
         const main = document.querySelector('main');
