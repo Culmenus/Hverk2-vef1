@@ -66,9 +66,9 @@ p {
 }
 
 .title {
-  display: flex;
-  justify-content: center;
   font-size: 2rem;
+  word-wrap: break-word;
+  text-align: center;
 }
 
 .section-underline {

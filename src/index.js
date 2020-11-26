@@ -8,7 +8,6 @@ import { element } from './lib/utils.js';
  */
 function init(videodata) {
   const main = document.querySelector('main');
-  main.appendChild(element('h1', { class: 'grid title' }, null, 'Fræðslumyndbandaleigan'));
   const lenCat = videodata.categories.length;
   for (let i = 0; i < lenCat; i += 1) {
     loadSection(videodata.categories[i].title, loadCards(videodata, videodata.categories[i].videos), `section-${i}`);
